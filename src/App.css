@@ -1,0 +1,8 @@
+body{
+  margin: 0px;
+  font-family: serif;
+  text-align: center;
+}
+#root div{
+  border: solid black 1px;
+}
