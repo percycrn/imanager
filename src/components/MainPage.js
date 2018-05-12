@@ -6,36 +6,15 @@ import Account from "./Account";
 import Application from "./Application";
 
 class MainPage extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <Wrapper>
         <Header>Header</Header>
         <SideBar>
           <div>logo</div>
-          <div
-            onClick={() => {
-              this.jump("/activity");
-            }}
-          >
-            activity
-          </div>
-          <div
-            onClick={() => {
-              this.jump("/application");
-            }}
-          >
-            application
-          </div>
-          <div
-            onClick={() => {
-              this.jump("/activity");
-            }}
-          >
-            activity
-          </div>
+          <div onClick={() => this.jump("/activity")}>activity</div>
+          <div onClick={() => this.jump("/application")}>application</div>
+          <div onClick={() => this.jump("/account")}>account</div>
         </SideBar>
         <Display>
           <Route path="/activity" component={Activity} Activity />

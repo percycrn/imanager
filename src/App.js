@@ -1,12 +1,20 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import MainPage from "./components/MainPage";
-import { Route } from "react-router-dom";
-
+import LogPage from "./components/LogPage";
+import { Provider } from "./store";
 
 class App extends Component {
+  state = {
+    logged: false
+  };
+  log = () => this.setState(state => ({ logged: true }));
+
   render() {
-    return <Route path="/" component={MainPage}/>;
+    return (
+      <Provider value={this.log}>
+        {this.state.logged ? <MainPage /> : <LogPage />}
+      </Provider>
+    );
   }
 }
 
