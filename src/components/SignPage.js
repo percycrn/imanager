@@ -1,26 +1,17 @@
-import React, { Component } from "react";
-import {Consumer}from "../store"
-
+import React, { Component } from 'react';
+import { Consumer } from '../store';
 
 class LogPage extends Component {
-
   render() {
     return (
       <Consumer>
-        {(v) =>(
-          <React.Fragment>
-          <div>LogPage</div>
-          <div onClick={()=>this.login(v)}>login</div>
-          </React.Fragment>
-          
-        )}
-        
+        {payload => <div onClick={() => this.doLogin(payload)}>login</div>}
       </Consumer>
     );
   }
-
-  login(callback){
-    callback()
+  doLogin(payload) {
+    payload.log();
+    this.props.history.push('/activity');
   }
 }
 
