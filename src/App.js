@@ -11,9 +11,10 @@ class App extends Component {
 
   render() {
     return (
-      <Provider value={this.log}>
-        {this.state.logged ? <MainPage /> : <LogPage />}
-      </Provider>
+      // <Provider value={this.log}>
+      //   {this.state.logged ? <MainPage /> : <LogPage />}
+      // </Provider>
+      <MainPage />
     );
   }
 }

@@ -1,8 +1,38 @@
-body{
-  margin: 0px;
-  font-family: serif;
-  text-align: center;
+@import "~antd/dist/antd.css";
+
+#root{
+  margin: 0px 0px 100px 110px;
+  color: #616366;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 25px;
+  box-sizing: border-box;
 }
-#root div{
-  border: solid black 1px;
+
+.App-sidebaritem {
+  display: block;
+  margin-bottom: 32px;
+  position: relative;
+  color: #a1c8ee;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+.App-sidebaritem:hover {
+  color: #ffffff;
+}
+.App-sidebaritem:focus {
+  color: #ffffff;
+}
+
+.App-title {
+  max-width: 1290px;
+  margin-left: 80px;
+  padding: 0px;
+}
+
+.App-navigation {
+  text-align: center;
+  padding-left: 30px;
+  padding-right: 30px;
 }
