@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Route, Switch ,BrowserHistory} from "react-router-dom";
+import { Route, Switch ,BrowserHistory,NavLink} from "react-router-dom";
 import Activity from "./Activity";
 import Account from "./Account";
 import Application from "./Application";
@@ -46,24 +46,24 @@ class MainPage extends Component {
         
         <SideBar>
           <div>logo</div>
-          <div
+          <NavLink
             className="App-sidebaritem"
-            onClick={() => this.jump("/activity")}
+            to="/activity"
           >
             activity
-          </div>
-          <div
+          </NavLink>
+          <NavLink
             className="App-sidebaritem"
-            onClick={() => this.jump("/application")}
+            to="/application"
           >
             application
-          </div>
-          <div
+          </NavLink>
+          <NavLink
             className="App-sidebaritem"
-            onClick={() => this.jump("/account")}
+            to="/account"
           >
             account
-          </div>
+          </NavLink>
         </SideBar>
         <Switch>
           <Route path="/activity" component={Activity} Activity />
