@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MainPage from "./components/MainPage";
-import LogPage from "./components/LogPage";
+import LogPage from "./components/SignPage";
 import { Provider } from "./store";
 
 class App extends Component {
