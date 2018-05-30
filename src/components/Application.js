@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Dropdown, Icon } from "antd";
+import { Menu, Icon } from "antd";
 
 class Application extends Component {
   state = {
