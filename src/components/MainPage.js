@@ -1,57 +1,107 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch ,BrowserHistory} from "react-router-dom";
 import Activity from "./Activity";
 import Account from "./Account";
 import Application from "./Application";
+import { Menu, Dropdown, Icon } from "antd";
 
 class MainPage extends Component {
+  
   render() {
+    const menu = (
+      // header
+      <Menu>
+        <Menu.Item>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.baidu.com/"
+          >
+            profile
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://www.qq.com/"
+          >
+            logout
+          </a>
+        </Menu.Item>
+      </Menu>
+    );
+    // mainpage导航栏
+    const SubMenu = Menu.SubMenu;
     return (
-      <Wrapper>
-        <Header>Header</Header>
+      <div>
+        <Header>
+          <Dropdown overlay={menu}>
+            <a className="ant-dropdown-link" href="#">
+              Welcome to activity manager! <Icon type="down" />
+            </a>
+          </Dropdown>
+        </Header>
+        
         <SideBar>
           <div>logo</div>
-          <div onClick={() => this.jump("/activity")}>activity</div>
-          <div onClick={() => this.jump("/application")}>application</div>
-          <div onClick={() => this.jump("/account")}>account</div>
+          <div
+            className="App-sidebaritem"
+            onClick={() => this.jump("/activity")}
+          >
+            activity
+          </div>
+          <div
+            className="App-sidebaritem"
+            onClick={() => this.jump("/application")}
+          >
+            application
+          </div>
+          <div
+            className="App-sidebaritem"
+            onClick={() => this.jump("/account")}
+          >
+            account
+          </div>
         </SideBar>
-        <Display>
+        <Switch>
           <Route path="/activity" component={Activity} Activity />
           <Route path="/account" component={Account} Account />
           <Route path="/application" component={Application} Application />
-        </Display>
-      </Wrapper>
+        </Switch>
+      </div>
     );
   }
 
   jump(path) {
-    this.props.history.push(path);
+   window.history.pushState({},"",path)
   }
 }
 
 export default MainPage;
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 100px auto;
-  grid-template-rows: 60px auto;
-  grid-template-areas:
-    "sidebar header"
-    "sidebar route-display";
-  height: 100vh;
-  box-sizing: border-box;
-`;
 const Header = styled.div`
-  grid-area: header;
+  max-width: 1290px;
+  margin: 0px auto;
+  padding: 16px 30px 0px 30px;
+  text-align: right;
+  position: relative;
+  white-space: nowrap;
 `;
 
 const SideBar = styled.div`
-  grid-area: sidebar;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-around;
-  align-items: center;
+  flex-flow: column;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 110px;
+  text-align: center;
+  background: transparent linear-gradient(80deg, #0b4182 1%, #1a78cf 99%) repeat
+    scroll 0% 0%;
+  z-index: 10;
 `;
 const Display = styled(Switch)`
   grid-area: route-display;
