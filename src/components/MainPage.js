@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import { Redirect, Route, Switch, NavLink } from 'react-router-dom';
-import Activity from './Activity';
-import Account from './Account';
-import Application from './Application';
-import { Menu, Dropdown, Icon } from 'antd';
-import { Consumer } from '../store';
+import React, { Component } from "react";
+import { Route, Switch, NavLink } from "react-router-dom";
+import Activity from "./Activity";
+import Account from "./Account";
+import Application from "./Application";
+import { Menu, Dropdown, Icon } from "antd";
 
 class MainPage extends Component {
   render() {
@@ -21,9 +20,13 @@ class MainPage extends Component {
           </a>
         </Menu.Item>
         <Menu.Item>
-          <Consumer>
-            {payload => <div onClick={() => payload.unlog()}>logout</div>}
-          </Consumer>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://www.qq.com/"
+          >
+            logout
+          </a>
         </Menu.Item>
       </Menu>
     );
@@ -57,6 +60,10 @@ class MainPage extends Component {
         </Switch>
       </div>
     );
+  }
+
+  jump(path) {
+    window.history.pushState({}, "", path);
   }
 }
 
