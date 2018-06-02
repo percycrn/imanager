@@ -17,9 +17,9 @@ class LogPage extends Component {
     return (
       <div className="App-darea">
         <div className="App-ddarea">
-        <FormItem>
-          <h1>Sign In</h1>
-        </FormItem>
+          <FormItem>
+            <h1>Sign In</h1>
+          </FormItem>
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
               {getFieldDecorator("userName", {
@@ -63,7 +63,11 @@ class LogPage extends Component {
                 htmlType="submit"
                 className="login-form-button"
               >
-                Log in
+                <Consumer>
+                  {payload => (
+                    <div onClick={() => this.doLogin(payload)}>login</div>
+                  )}
+                </Consumer>
               </Button>
               Or <a href="">register now!</a>
             </FormItem>
