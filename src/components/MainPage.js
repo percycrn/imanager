@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Redirect, Route, Switch, NavLink } from 'react-router-dom';
-import Activity from './Activity';
-import Account from './Account';
-import Application from './Application';
-import { Menu, Dropdown, Icon } from 'antd';
-import { Consumer } from '../store';
+import React, { Component } from "react";
+import { Route, Switch, NavLink } from "react-router-dom";
+import Activity from "./Activity";
+import Account from "./Account";
+import Application from "./Application";
+import { Menu, Dropdown, Icon } from "antd";
+import logo from './logo.svg';
 
 class MainPage extends Component {
   render() {
@@ -21,9 +21,13 @@ class MainPage extends Component {
           </a>
         </Menu.Item>
         <Menu.Item>
-          <Consumer>
-            {payload => <div onClick={() => payload.unlog()}>logout</div>}
-          </Consumer>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://www.qq.com/"
+          >
+            logout
+          </a>
         </Menu.Item>
       </Menu>
     );
@@ -39,14 +43,14 @@ class MainPage extends Component {
         </div>
 
         <div className="App-sidebar">
-          <div>logo</div>
-          <NavLink className="App-sidebaritem" to="/activity">
+          <img src={logo} className="App-logo" alt="logo"/>
+          <NavLink id="activityitem" className="App-sidebaritem" to="/activity">
             activity
           </NavLink>
-          <NavLink className="App-sidebaritem" to="/application">
+          <NavLink id="applicationitem" className="App-sidebaritem" to="/application">
             application
           </NavLink>
-          <NavLink className="App-sidebaritem" to="/account">
+          <NavLink id="accountitem" className="App-sidebaritem" to="/account">
             account
           </NavLink>
         </div>
@@ -57,6 +61,10 @@ class MainPage extends Component {
         </Switch>
       </div>
     );
+  }
+
+  jump(path) {
+    window.history.pushState({}, "", path);
   }
 }
 

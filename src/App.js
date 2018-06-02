@@ -9,8 +9,8 @@ class App extends Component {
     logged: false,
   };
 
-  log = () => this.setState(state => ({ logged: true }));
-  unlog = () => this.setState(state => ({ logged: false }));
+  log = () => this.setState(state => ({ logged: true}));
+  unlog = () => this.setState(state => ({ logged: false}));
 
   render() {
     return (
@@ -24,5 +24,4 @@ class App extends Component {
     );
   }
 }
-
 export default withRouter(App);
