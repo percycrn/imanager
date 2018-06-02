@@ -1,0 +1,130 @@
+#########################################################
+#                    type definition
+#########################################################
+type User {
+  uid: ID
+  name: String
+  tags: [String]
+  email: String
+  address: String
+}
+
+type Activity {
+  aid: ID!
+  name: String!
+  address: String
+  startTime: String
+  endTime: String
+  now: Int # 已报人数
+  max: Int # 最大人数
+  min: Int # 最低人数
+  summary: String #教师写，管理员看？？
+  tags: [String]
+  signUpTime: String
+  state: ActivityState
+}
+
+type Applicaton {
+  userId: ID
+  tag: String
+  applyTime: String
+  state: ApplicatonState
+}
+
+#####暂时
+# type ActivityRecord{
+#     userId: String!
+#     activityId: String!
+#     tagId: String!
+#     signUpTime: String!
+# }
+
+#登陆失败 success为faluse ，error是错误信息，其余属性均不出现（或为空）。
+#登陆成功 success为true，error不出现（或为空），token用来维持会话，
+#user是用户基本信息
+#登陆成功，默认路由是/activity/public,
+#publicActivites,用来渲染页面
+type LoginRespon {
+  success: Boolean!
+  token: String
+  error: Error
+  user: User
+  publicActivites: [Activity]
+}
+
+#错误代码为三位数，具体待定
+#业务错误以9开头
+type Error {
+  code: Int!
+  message: String!
+}
+
+enum ActivityState {
+  REGISTERING
+  AFTER_REG
+  HOLDING
+  FINISHED
+}
+
+enum ApplicatonState {
+  PEDDING
+  PASS
+  DENY
+}
+
+#########################################################
+#                    input
+#########################################################
+input SignData {
+  phoneNO: String!
+  password: String!
+}
+
+input UserFilter {
+  id: ID
+  name: String
+}
+
+input UserInfo {
+  email: String
+  address: String
+}
+
+#########################################################
+#                    entrance
+#########################################################
+type Query {
+  #活动相关
+  #约定每页加载10个
+  publicActivites(page: Int, size: Int = 10): [Activity]
+  joinedActivites(page: Int, size: Int = 10, uid: ID!): [Activity]
+  #用户相关
+  users(filter: UserFilter!): [User]
+  #申请相关
+  applications(page: Int, size: Int = 10, uid: ID!): [Applicaton]
+}
+
+type Mutation {
+  # 注册登陆登出
+  signIn(data: SignData!): LoginRespon #登陆
+  signUp(data: SignData!): LoginRespon #注册
+  logOut(token: String): Boolean #登出
+  #活动相关
+  joinActivity(aid: ID!, uid: ID!): Activity
+  cancelActivity(aid: ID!, uid: ID!): Boolean
+  ###管理员的
+  # saveActivity(activity: Activity!): Activity
+  # deleteActivity(activityId: String!): Activity
+  # modifyActivity(activityId: String!, activity: Activity!):Activity
+  # signUpActivity(activityRecord: ActivityRecord!): ActivityRecord
+  # signInActivity(activityRecord: ActivityRecord!): ActivityRecord
+  #用户相关
+  modifyUserInfo(user: UserInfo!): User
+  #申请相关
+  apply(uid: String!, tag: String!): Applicaton
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
