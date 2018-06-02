@@ -4,6 +4,7 @@ import Activity from "./Activity";
 import Account from "./Account";
 import Application from "./Application";
 import { Menu, Dropdown, Icon } from "antd";
+import logo from './logo.svg';
 
 class MainPage extends Component {
   render() {
@@ -42,14 +43,14 @@ class MainPage extends Component {
         </div>
 
         <div className="App-sidebar">
-          <div>logo</div>
-          <NavLink className="App-sidebaritem" to="/activity">
+          <img src={logo} className="App-logo" alt="logo"/>
+          <NavLink id="activityitem" className="App-sidebaritem" to="/activity">
             activity
           </NavLink>
-          <NavLink className="App-sidebaritem" to="/application">
+          <NavLink id="applicationitem" className="App-sidebaritem" to="/application">
             application
           </NavLink>
-          <NavLink className="App-sidebaritem" to="/account">
+          <NavLink id="accountitem" className="App-sidebaritem" to="/account">
             account
           </NavLink>
         </div>
