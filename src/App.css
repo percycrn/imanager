@@ -88,22 +88,30 @@ a:focus {
   margin-bottom: 30px;
 }
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 .App-title {
   max-width: 1290px;
-  margin-left: 160px;
-  margin-top: 30px;
-  margin-bottom: 25px;
-  padding: 0px;
+  min-width: 360px;
+  margin: 0px auto;
+  padding: 16px 30px 20px 0px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: center;
+  align-items: center;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
 }
 
 .App-navigation {
   text-align: center;
-  margin-left: 132px;
-  padding-left: 30px;
-  padding-right: 30px;
 }
 
 .App-header {
@@ -123,7 +131,7 @@ a:focus {
   align-items: center;
   justify-content: center;
 }
-.App-ddarea{
+.App-ddarea {
   display: flex;
   flex-flow: column;
   border-radius: 6px;
@@ -141,4 +149,28 @@ a:focus {
 }
 .login-form-button {
   width: 100%;
+}
+
+.rightpage {
+  max-width: 1410px;
+  padding-left: 70px;
+  white-space: nowrap;
+}
+
+.rootin {
+  margin: 0px 0px 100px 110px;
+  color: #616366;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 25px;
+  box-sizing: border-box;
+}
+.demo-loadmore-list {
+  min-height: 350px;
+}
+
+.mainpage {
+  max-width: 1290px;
+  margin-top: 20px;
 }

@@ -1,47 +1,15 @@
 import React, { Component } from "react";
-import { Route, Switch, NavLink } from "react-router-dom";
-import Activity from "./Activity";
-import Account from "./Account";
-import Application from "./Application";
-import { Menu, Dropdown, Icon } from "antd";
+import { withRouter, Route, Switch, NavLink } from "react-router-dom";
+import Activity from "./activity/Activity";
+import Account from "./account/Account";
+import Application from "./application/Application";
 import logo from './logo.svg';
 
 class MainPage extends Component {
   render() {
-    const menu = (
-      // header
-      <Menu>
-        <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.baidu.com/"
-          >
-            profile
-          </a>
-        </Menu.Item>
-        <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.qq.com/"
-          >
-            logout
-          </a>
-        </Menu.Item>
-      </Menu>
-    );
     // mainpage导航栏
     return (
-      <div>
-        <div className="App-header">
-          <Dropdown overlay={menu}>
-            <a className="ant-dropdown-link">
-              Welcome to activity manager! <Icon type="down" />
-            </a>
-          </Dropdown>
-        </div>
-
+      <div className="rootin">
         <div className="App-sidebar">
           <img src={logo} className="App-logo" alt="logo"/>
           <NavLink id="activityitem" className="App-sidebaritem" to="/activity">
@@ -62,10 +30,6 @@ class MainPage extends Component {
       </div>
     );
   }
-
-  jump(path) {
-    window.history.pushState({}, "", path);
-  }
 }
 
-export default MainPage;
+export default withRouter(MainPage);
