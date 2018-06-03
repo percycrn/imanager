@@ -48,15 +48,6 @@ server.use('/graphql', bodyParser.json(), graphqlExpress(async (request) => {
 
 server.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
-  query: `query rates($currency: String!) {
-  rates(currency: $currency) {
-    currency
-    rates {
-      currency
-      rate
-    }
-  }
-}`,
 }));
 
 server.listen(PORT, () => {

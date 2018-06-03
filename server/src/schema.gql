@@ -39,13 +39,12 @@ type Applicaton {
 #     signUpTime: String!
 # }
 
-#登陆失败 success为faluse ，error是错误信息，其余属性均不出现（或为空）。
-#登陆成功 success为true，error不出现（或为空），token用来维持会话，
+#登陆失败 error是错误信息，其余属性均为空。
+#登陆成功 error为空，token用来维持会话，
 #user是用户基本信息
 #登陆成功，默认路由是/activity/public,
 #publicActivites,用来渲染页面
 type LoginRespon {
-  success: Boolean!
   token: String
   error: Error
   user: User
@@ -76,8 +75,8 @@ enum ApplicatonState {
 #                    input
 #########################################################
 input SignData {
-  phoneNO: String!
-  password: String!
+  phoneNo: String
+  password: String
 }
 
 input UserFilter {
@@ -106,9 +105,9 @@ type Query {
 
 type Mutation {
   # 注册登陆登出
-  signIn(data: SignData!): LoginRespon #登陆
+  signIn(phoneNo: String, password: String): LoginRespon #登陆
   signUp(data: SignData!): LoginRespon #注册
-  logOut(token: String): Boolean #登出
+  logOut(uid: ID): Boolean #登出
   #活动相关
   joinActivity(aid: ID!, uid: ID!): Activity
   cancelActivity(aid: ID!, uid: ID!): Boolean
