@@ -12,13 +12,13 @@ class MainPage extends Component {
       <div className="rootin">
         <div className="App-sidebar">
           <img src={logo} className="App-logo" alt="logo"/>
-          <NavLink id="activityitem" className="App-sidebaritem" to="/activity">
+          <NavLink id="activityitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/activity">
             activity
           </NavLink>
-          <NavLink id="applicationitem" className="App-sidebaritem" to="/application">
+          <NavLink id="applicationitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/application">
             application
           </NavLink>
-          <NavLink id="accountitem" className="App-sidebaritem" to="/account">
+          <NavLink id="accountitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/account">
             account
           </NavLink>
         </div>

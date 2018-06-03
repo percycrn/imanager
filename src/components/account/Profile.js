@@ -4,6 +4,7 @@ const data = [
   {
     title: 'Ant Design Title 1',
   },
+
   {
     title: 'Ant Design Title 2',
   },
@@ -14,7 +15,7 @@ const data = [
     title: 'Ant Design Title 4',
   },
 ];
-class ActivityList extends Component {
+class Profile extends Component {
   render() {
     return (
       <div className="mainpage">
@@ -41,4 +42,4 @@ class ActivityList extends Component {
   }
 }
 
-export default ActivityList;
+export default Profile;

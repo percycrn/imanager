@@ -14,7 +14,7 @@ const data = [
     title: 'Ant Design Title 4',
   },
 ];
-class ActivityList extends Component {
+class AppOccupation extends Component {
   render() {
     return (
       <div className="mainpage">
@@ -41,4 +41,4 @@ class ActivityList extends Component {
   }
 }
 
-export default ActivityList;
+export default AppOccupation;

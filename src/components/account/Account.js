@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Menu, Dropdown, Icon } from "antd";
+import { Switch, NavLink, Route } from "react-router-dom";
+import Profile from "./Profile";
 
 class Account extends Component {
   state = {
@@ -57,10 +59,13 @@ class Account extends Component {
             mode="horizontal"
           >
             <Menu.Item key="mail">
-              <Icon type="edit" />Profile
+              <NavLink to="/account/profile">Profile</NavLink>
             </Menu.Item>
           </Menu>
         </div>
+        <Switch>
+          <Route path="/account/profile" component={Profile} Profile />
+        </Switch>
       </div>
     );
   }

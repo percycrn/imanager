@@ -49,7 +49,10 @@ a:focus {
 :active {
   color: #ffffff;
 }
-.App-sidebaritem:focus::after {
+.App-sidebaritemactive{
+  color: #ffffff;
+}
+.App-sidebaritemactive::after{
   font-family: "icomoon" !important;
   position: absolute;
   left: 88.6px;

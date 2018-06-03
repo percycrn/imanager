@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Menu, Dropdown, Icon } from "antd";
+import { Route, Switch, NavLink } from "react-router-dom";
+import AppOccupation from "./AppOccupation"
+import AppStates from "./AppStates"
 
 class Application extends Component {
   state = {
@@ -57,13 +60,21 @@ class Application extends Component {
             mode="horizontal"
           >
             <Menu.Item key="mail">
-              <Icon type="solution" />Application Occupation
+              <NavLink to="/application/occupation">Application Occupation</NavLink>
             </Menu.Item>
             <Menu.Item key="app">
-              <Icon type="appstore" />Application Status
+              <NavLink to="/application/states">Application States</NavLink>
             </Menu.Item>
           </Menu>
         </div>
+        <Switch>
+          <Route path="/application/occupation" component={AppOccupation} AppOccupation />
+          <Route
+            path="/application/states"
+            component={AppStates}
+            AppStates
+          />
+        </Switch>
       </div>
     );
   }

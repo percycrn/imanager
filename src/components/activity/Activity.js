@@ -4,7 +4,6 @@ import { Route, Switch, NavLink } from "react-router-dom";
 import ActivityList from "./ActivityList";
 import ActivityRecord from "./ActivityRecord";
 import ActivityHistory from "./ActivityHistory";
-
 class Activity extends Component {
   state = {
     current: "list"
