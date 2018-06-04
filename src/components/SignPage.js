@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Consumer } from "../store";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import React, { Component } from 'react';
+import { Consumer } from '../store';
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
 const FormItem = Form.Item;
 
 class LogPage extends Component {
@@ -8,7 +8,7 @@ class LogPage extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        console.log('Received values of form: ', values);
       }
     });
   };
@@ -22,28 +22,28 @@ class LogPage extends Component {
           </FormItem>
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
-              {getFieldDecorator("userName", {
+              {getFieldDecorator('userName', {
                 rules: [
-                  { required: true, message: "Please input your username!" }
-                ]
+                  { required: true, message: 'Please input your username!' },
+                ],
               })(
                 <Input
                   prefix={
-                    <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                    <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
                   }
-                  placeholder="Username"
+                  placeholder="phone number"
                 />
               )}
             </FormItem>
             <FormItem>
-              {getFieldDecorator("password", {
+              {getFieldDecorator('password', {
                 rules: [
-                  { required: true, message: "Please input your Password!" }
-                ]
+                  { required: true, message: 'Please input your Password!' },
+                ],
               })(
                 <Input
                   prefix={
-                    <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
                   }
                   type="password"
                   placeholder="Password"
@@ -51,24 +51,27 @@ class LogPage extends Component {
               )}
             </FormItem>
             <FormItem>
-              {getFieldDecorator("remember", {
-                valuePropName: "checked",
-                initialValue: true
-              })(<Checkbox>Remember me</Checkbox>)}
+              {/* {getFieldDecorator('remember', {
+                valuePropName: 'checked',
+                initialValue: true,
+              })(
+              <Checkbox>Remember me</Checkbox>
+              )}
               <a className="login-form-forgot" href="">
                 Forgot password
-              </a>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-              >
-                <Consumer>
-                  {payload => (
-                    <div onClick={() => this.doLogin(payload)}>login</div>
-                  )}
-                </Consumer>
-              </Button>
+              </a> */}
+              <Consumer>
+                {payload => (
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="login-form-button"
+                    onClick={() => this.doLogin(payload)}
+                  >
+                    login
+                  </Button>
+                )}
+              </Consumer>
               Or <a href="">register now!</a>
             </FormItem>
           </Form>
@@ -76,9 +79,16 @@ class LogPage extends Component {
       </div>
     );
   }
+
   doLogin(payload) {
+
+    //account check here
+    //todo
+    //不合法
+    //todo
+    //合法
     payload.log();
-    this.props.history.push("/activity");
+    this.props.history.push('/activity/list');
   }
 }
 LogPage = Form.create()(LogPage);

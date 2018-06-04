@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Menu, Dropdown, Icon } from "antd";
+import { Menu } from "antd";
 import { Route, Switch, NavLink } from "react-router-dom";
 import ActivityList from "./ActivityList";
 import ActivityRecord from "./ActivityRecord";
@@ -15,39 +15,8 @@ class Activity extends Component {
     });
   };
   render() {
-    const menu = (
-      // header
-      <Menu>
-        <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.baidu.com/"
-          >
-            profile
-          </a>
-        </Menu.Item>
-        <Menu.Item>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://www.qq.com/"
-          >
-            logout
-          </a>
-        </Menu.Item>
-      </Menu>
-    );
     return (
-      <div className="rightpage">
-        {/* header */}
-        <div className="App-header">
-          <Dropdown overlay={menu}>
-            <a className="ant-dropdown-link">
-              Welcome to activity manager! <Icon type="down" />
-            </a>
-          </Dropdown>
-        </div>
+      <div className="App-main">
         {/* title */}
         <div className="App-title">
           <h1>Manage Your Activities</h1>

@@ -3,6 +3,8 @@ import { withRouter, Route, Switch, NavLink } from "react-router-dom";
 import Activity from "./activity/Activity";
 import Account from "./account/Account";
 import Application from "./application/Application";
+import Header from "./Header";
+
 import logo from './logo.svg';
 
 class MainPage extends Component {
@@ -10,15 +12,16 @@ class MainPage extends Component {
     // mainpage导航栏
     return (
       <div className="rootin">
+        <Header className="App-header"/>
         <div className="App-sidebar">
           <img src={logo} className="App-logo" alt="logo"/>
-          <NavLink id="activityitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/activity">
+          <NavLink id="activityitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/activity/list">
             activity
           </NavLink>
-          <NavLink id="applicationitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/application">
+          <NavLink id="applicationitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/application/occupation">
             application
           </NavLink>
-          <NavLink id="accountitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/account">
+          <NavLink id="accountitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/account/profile">
             account
           </NavLink>
         </div>
