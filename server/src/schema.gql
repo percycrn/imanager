@@ -2,13 +2,12 @@
 #                    type definition
 #########################################################
 type User {
-  uid: ID!
+  uid: String!
   name: String!
-  tags: [String]
+  tags: [String]!
   email: String
   address: String
-  phoneNumber: String! # add
-  password: String! # add
+  phoneNumber: String!
 }
 
 type Activity {
@@ -21,7 +20,7 @@ type Activity {
   max: Int # 最大人数
   min: Int # 最低人数
   summary: String # 教师写，管理员看？？
-  tid: String! # 标签id
+  tag: String! # 标签
   signUpTime: String
   state: ActivityState
 }
@@ -46,7 +45,7 @@ type ActivityRecord{
 #user是用户基本信息
 #登陆成功，默认路由是/activity/public,
 #publicActivites,用来渲染页面
-type LoginRespon {
+type LoginResponse {
   token: String
   error: Error
   user: User
@@ -68,7 +67,7 @@ enum ActivityState {
 }
 
 enum ApplicatonState {
-  PEDDING
+  PENDDING
   PASS
   DENY
 }
@@ -77,56 +76,59 @@ enum ApplicatonState {
 #                    input
 #########################################################
 input SignData {
-  phoneNo: String
+  phoneNumber: String
   password: String
 }
 
-input UserFilter {
-  id: ID
-  name: String
-}
-
 input UserInfo {
+  uid: String!
   email: String
   address: String
+}
+
+input ApplicationInfo{
+  uid: ID!
+  tag: String!
+  applyTime: String!
+  state: String!
+}
+
+input ActivityInfo{
+  uid: ID!
+  aid: ID!
+  activity: Activity!
 }
 
 #########################################################
 #                    entrance
 #########################################################
 type Query {
-  # 约定每页加载10个
-  # 管理员相关
-  applicationList(page: Int, size: Int = 10): [Application] # 获得所有待审核的申请
-  users(filter: UserFilter!): [User]
-  # 用户相关
-  publicActivites(page: Int, size: Int = 10): [Activity]
-  joinedActivites(page: Int, size: Int = 10, uid: ID!): [Activity]
-  userHistoryRecords(uid: ID!): [Activity]
-  # 申请相关
-  applications(page: Int, size: Int = 10, uid: ID!): [Applicaton]
+  # 管理员
+  getUsers: [User] # 返回所有用户对象
+  # 用户
+  unjoinedActivity(): [Activity] # 没参加可以报名的
+  joinedActivity(): [Activity] # 已报名但未开始的
+  finishedActivity(uid: ID!): [Activity]
+  # 申请
+  getApplications(uid: ID!): [Application] # 获得所有待审核的申请/没有参数返回所有
 }
 
 type Mutation {
   # 注册登陆登出
-  signIn(phoneNo: String, password: String): LoginRespon # 登陆
-  signUp(data: SignData!): LoginRespon # 注册
-  logOut(uid: ID): Boolean # 登出
-  # 管理员的
-  saveActivity(activity: Activity!): Activity
-  deleteActivity(aid: String!): Activity
-  modifyActivity(aid: String!, activity: Activity!): Activity
-  checkApplication(uid: String!, tag: String!, state: String!) # 管理员改变申请状态
+  signIn(data: SignData!): LoginResponse # 登陆
+  signUp(data: SignData!): LoginResponse # 注册
+  logOut: null # 登出
+  # 管理员
+  createActivity(data: ActivityInfo): Activity
+  deleteActivity(data: ActivityInfo): Activity
+  updateActivity(data: ActivityInfo): Activity
   # 用户相关
-  modifyUserInfo(uid: ID!, user: UserInfo!): User
-  signUpActivity(activityRecord: ActivityRecord!): ActivityRecord
-  signInActivity(activityRecord: ActivityRecord!): ActivityRecord
-  cancelActivity(aid: ID!, uid: ID!): Boolean
+  updateUserInfo(user: UserInfo!): User
+  createActivityUser(data: ActivityInfo): Activity # 报名
+  deleteActivityUser(data: ActivityInfo): Activity
+  updateActivityUser(data: ActivityInfo): Activity # 签到
   # 申请相关
-  apply(uid: String!, tag: String!, applyTime: String!): Applicaton
-}
-
-schema {
-  query: Query
-  mutation: Mutation
+  createApp(data: ApplicationInfo!): Application
+  deleteApp(data: ApplicationInfo!): Application # 返回删除的App
+  updateApp(data: ApplicationInfo!): Application # 改变申请状态
 }
