@@ -107,8 +107,7 @@ type Query {
   getUsers: [User] # 返回所有用户对象
   # 用户
   unjoinedActivity(): [Activity] # 没参加可以报名的
-  joinedActivity(): [Activity] # 已报名但未开始的
-  finishedActivity(uid: ID!): [Activity]
+  joinedActivity(uid: ID!): [Activity] # 已报名但未开始的
   # 申请
   getApplications(uid: ID!): [Application] # 获得所有待审核的申请/没有参数返回所有
 }
