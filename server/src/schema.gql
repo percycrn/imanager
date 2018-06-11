@@ -47,16 +47,9 @@ type ActivityRecord{
 #publicActivites,用来渲染页面
 type LoginResponse {
   token: String
-  error: Error
+  errorMessage: String
   user: User
-  publicActivites: [Activity]
-}
-
-#错误代码为三位数，具体待定
-#业务错误以9开头
-type Error {
-  code: Int!
-  message: String!
+  joinedActivites: [Activity]
 }
 
 enum ActivityState {
@@ -116,7 +109,7 @@ type Mutation {
   # 注册登陆登出
   signIn(data: SignData!): LoginResponse # 登陆
   signUp(data: SignData!): LoginResponse # 注册
-  logOut: null # 登出
+  signOut(data: SignData!): null # 登出
   # 管理员
   createActivity(data: ActivityInfo): Activity
   deleteActivity(data: ActivityInfo): Activity
