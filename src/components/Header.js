@@ -1,21 +1,15 @@
 import React from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
-import { Consumer } from '../store';
 
-const menu = (
-  <Consumer>
-    {payload => (
-      <Menu>
-        <Menu.Item>profile</Menu.Item>
-        <Menu.Item onClick={payload.unlog}>logout</Menu.Item>
-      </Menu>
-    )}
-  </Consumer>
-);
-
-export default () => (
+export default (props) => (
   <div className="App-header">
-    <Dropdown overlay={menu}>
+    <Dropdown
+      overlay={
+        <Menu>
+          <Menu.Item onClick={props.handelSignOut}>logout</Menu.Item>
+        </Menu>
+      }
+    >
       <span className="ant-dropdown-link">
         Welcome to activity manager! <Icon type="down" />
       </span>

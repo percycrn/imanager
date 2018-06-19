@@ -1,16 +1,5 @@
 import React, { Component } from "react";
-import { List, Avatar } from "antd";
-const data = [
-  {
-    title: 'Ant Design Title 1',
-  },
-  {
-    title: 'Ant Design Title 2',
-  },
-  {
-    title: 'Ant Design Title 3',
-  },
-];
+import { List } from "antd";
 class ActivityRecord extends Component {
   render() {
     return (
@@ -18,18 +7,22 @@ class ActivityRecord extends Component {
         {/* mainpage */}
         <List
           className="demo-loadmore-list"
+          size="large"
           itemLayout="horizontal"
-          dataSource={data}
+          dataSource={this.props.data}
+          pagination={{
+            position: 'bottom',
+            pageSize:4,
+            size:"large"
+          }}
           renderItem={item => (
-            <List.Item actions={[<a>edit</a>, <a>more</a>]}>
-              <List.Item.Meta
-                avatar={
-                  <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                }
-                title={<a href="https://ant.design">{item.title}</a>}
-                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-              />
-              <div>content</div>
+            <List.Item actions={[<a>edit</a>]}>
+              <List.Item.Meta title={item.name} description={item.address} />
+              <section>
+                <p>
+                  <strong>Time</strong> {item.startTime} - {item.endTime}
+                </p>
+              </section>
             </List.Item>
           )}
         />

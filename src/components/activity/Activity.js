@@ -1,60 +1,155 @@
-import React, { Component } from "react";
-import { Menu } from "antd";
-import { Route, Switch, NavLink } from "react-router-dom";
-import ActivityList from "./ActivityList";
-import ActivityRecord from "./ActivityRecord";
-import ActivityHistory from "./ActivityHistory";
+import React, { Component } from 'react';
+import {  Tabs } from 'antd';
+import ActivityList from './ActivityList';
+import ActivityRecord from './ActivityRecord';
+
+const { TabPane } = Tabs;
 class Activity extends Component {
   state = {
-    current: "list"
-  };
-  handleClick = e => {
-    console.log("click ", e);
-    this.setState({
-      current: e.key
-    });
+    unjoined:data,
+    joinedData: data,
   };
   render() {
     return (
       <div className="App-main">
-        {/* title */}
-        <div className="App-title">
-          <h1>Manage Your Activities</h1>
-        </div>
-        {/* navigation */}
-        <div className="App-navigation">
-          <Menu
-            onClick={this.handleClick}
-            selectedKeys={[this.state.current]}
-            mode="horizontal"
-          >
-            <Menu.Item key="list">
-              <NavLink to="/activity/list">Activity List</NavLink>
-            </Menu.Item>
-            <Menu.Item key="record">
-              <NavLink to="/activity/record">Activity Record</NavLink>
-            </Menu.Item>
-            <Menu.Item key="history">
-              <NavLink to="/activity/history">Activity History</NavLink>
-            </Menu.Item>
-          </Menu>
-        </div>
-        <Switch>
-          <Route path="/activity/list" component={ActivityList} ActivityList />
-          <Route
-            path="/activity/record"
-            component={ActivityRecord}
-            ActivityList
-          />
-          <Route
-            path="/activity/history"
-            component={ActivityHistory}
-            ActivityList
-          />
-        </Switch>
+        <Tabs defaultActiveKey="1" size="large">
+          <TabPane tab="join activity" key="1">
+            <ActivityList data={this.state.unjoined}/>
+          </TabPane>
+          <TabPane tab="My Activity" key="2">
+            <ActivityRecord data={this.state.joinedData}/>
+          </TabPane>
+        </Tabs>
       </div>
     );
   }
 }
-
+const data = [
+  {
+    aid: 'xxxxxxxxxxxxxxx',
+    name: 'xxxxxxxxxxxxxxx',
+    address: 'xxxxxxxxxxxxxxx',
+    startTime: '0000/00/00 00:00',
+    endTime: '0000/00/00 00:00',
+    now: 0,
+    max: 0,
+    min: 0,
+    summary: 'xxxxxxxxxxxxxxx',
+    tag: ['xxx', 'xxx', 'xxx'],
+    signUpTime: '0000/00/00 00:00',
+    state: 'xxxxx',
+  },
+  {
+    aid: 'xxxxxxxxxxxxxxx',
+    name: 'xxxxxxxxxxxxxxx',
+    address: 'xxxxxxxxxxxxxxx',
+    startTime: '0000/00/00 00:00',
+    endTime: '0000/00/00 00:00',
+    now: 0,
+    max: 0,
+    min: 0,
+    summary: 'xxxxxxxxxxxxxxx',
+    tag: ['xxx', 'xxx', 'xxx'],
+    signUpTime: '0000/00/00 00:00',
+    state: 'xxxxx',
+  },
+  {
+    aid: 'xxxxxxxxxxxxxxx',
+    name: 'xxxxxxxxxxxxxxx',
+    address: 'xxxxxxxxxxxxxxx',
+    startTime: '0000/00/00 00:00',
+    endTime: '0000/00/00 00:00',
+    now: 0,
+    max: 0,
+    min: 0,
+    summary: 'xxxxxxxxxxxxxxx',
+    tag: ['xxx', 'xxx', 'xxx'],
+    signUpTime: '0000/00/00 00:00',
+    state: 'xxxxx',
+  },
+  {
+    aid: 'xxxxxxxxxxxxxxx',
+    name: 'xxxxxxxxxxxxxxx',
+    address: 'xxxxxxxxxxxxxxx',
+    startTime: '0000/00/00 00:00',
+    endTime: '0000/00/00 00:00',
+    now: 0,
+    max: 0,
+    min: 0,
+    summary: 'xxxxxxxxxxxxxxx',
+    tag: ['xxx', 'xxx', 'xxx'],
+    signUpTime: '0000/00/00 00:00',
+    state: 'xxxxx',
+  },
+  {
+    aid: 'xxxxxxxxxxxxxxx',
+    name: 'xxxxxxxxxxxxxxx',
+    address: 'xxxxxxxxxxxxxxx',
+    startTime: '0000/00/00 00:00',
+    endTime: '0000/00/00 00:00',
+    now: 0,
+    max: 0,
+    min: 0,
+    summary: 'xxxxxxxxxxxxxxx',
+    tag: ['xxx', 'xxx', 'xxx'],
+    signUpTime: '0000/00/00 00:00',
+    state: 'xxxxx',
+  },
+  {
+    aid: 'xxxxxxxxxxxxxxx',
+    name: 'xxxxxxxxxxxxxxx',
+    address: 'xxxxxxxxxxxxxxx',
+    startTime: '0000/00/00 00:00',
+    endTime: '0000/00/00 00:00',
+    now: 0,
+    max: 0,
+    min: 0,
+    summary: 'xxxxxxxxxxxxxxx',
+    tag: ['xxx', 'xxx', 'xxx'],
+    signUpTime: '0000/00/00 00:00',
+    state: 'xxxxx',
+  },
+  {
+    aid: 'xxxxxxxxxxxxxxx',
+    name: 'xxxxxxxxxxxxxxx',
+    address: 'xxxxxxxxxxxxxxx',
+    startTime: '0000/00/00 00:00',
+    endTime: '0000/00/00 00:00',
+    now: 0,
+    max: 0,
+    min: 0,
+    summary: 'xxxxxxxxxxxxxxx',
+    tag: ['xxx', 'xxx', 'xxx'],
+    signUpTime: '0000/00/00 00:00',
+    state: 'xxxxx',
+  },
+  {
+    aid: 'xxxxxxxxxxxxxxx',
+    name: 'xxxxxxxxxxxxxxx',
+    address: 'xxxxxxxxxxxxxxx',
+    startTime: '0000/00/00 00:00',
+    endTime: '0000/00/00 00:00',
+    now: 0,
+    max: 0,
+    min: 0,
+    summary: 'xxxxxxxxxxxxxxx',
+    tag: ['xxx', 'xxx', 'xxx'],
+    signUpTime: '0000/00/00 00:00',
+    state: 'xxxxx',
+  },
+  {
+    aid: 'xxxxxxxxxxxxxxx',
+    name: 'xxxxxxxxxxxxxxx',
+    address: 'xxxxxxxxxxxxxxx',
+    startTime: '0000/00/00 00:00',
+    endTime: '0000/00/00 00:00',
+    now: 0,
+    max: 0,
+    min: 0,
+    summary: 'xxxxxxxxxxxxxxx',
+    tag: ['xxx', 'xxx', 'xxx'],
+    signUpTime: '0000/00/00 00:00',
+    state: 'xxxxx',
+  },
+];
 export default Activity;

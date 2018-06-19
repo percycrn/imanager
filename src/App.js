@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
 import MainPage from './components/MainPage';
-import LogPage from './components/SignPage';
-import { Provider } from './store';
-import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
+import SignPage from './components/signPage/SignPage';
+import { withRouter } from 'react-router-dom';
 
 class App extends Component {
   state = {
-    logged: false,
+    isSignIn: false,
   };
 
-  log = () => this.setState(state => ({ logged: true}));
-  unlog = () => this.setState(state => ({ logged: false}));
+  signIn = () => this.setState({ isSignIn: true });
+  signOut = () => this.setState({ isSignIn: false });
 
   render() {
-    return (
-      <Provider value={this}>
-        {!this.state.logged && this.props.location.pathname !== '/login' && <Redirect to='/login' />}
-        <Switch>
-          <Route path="/login" component={LogPage} />
-          <Route path="/" component={MainPage} />
-        </Switch>
-      </Provider>
-    );
+    if (this.state.isSignIn) {
+      return <MainPage handelSignOut={this.signOut} />;
+    } else {
+      return <SignPage handelSignIn={this.signIn} />;
+    }
   }
 }
 export default withRouter(App);

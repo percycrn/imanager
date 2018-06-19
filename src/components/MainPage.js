@@ -1,29 +1,43 @@
-import React, { Component } from "react";
-import { withRouter, Route, Switch, NavLink } from "react-router-dom";
-import Activity from "./activity/Activity";
-import Account from "./account/Account";
-import Application from "./application/Application";
-import Header from "./Header";
+import React, { Component } from 'react';
+import { withRouter, Route, Switch, NavLink } from 'react-router-dom';
+import { Icon } from 'antd';
+import Activity from './activity/Activity';
+import Account from './account/Account';
+import Application from './application/Application';
+import Header from './Header';
+import client from "../client"
 
 import logo from './logo.svg';
+
+const iconStyle = {
+  fontSize: 40,
+  color: '#ffffff',
+  marginBottom: 10,
+};
+
+const SideBarItem = ({to,text,icon}) => (
+  <NavLink
+    id="activityitem"
+    className="App-sidebaritem"
+    activeClassName="App-sidebaritemactive"
+    to={to}
+  >
+    <Icon type={icon} style={iconStyle} />
+    <div>{text}</div>
+  </NavLink>
+);
 
 class MainPage extends Component {
   render() {
     // mainpage导航栏
     return (
       <div className="rootin">
-        <Header className="App-header"/>
+        <Header className="App-header" handelSignOut={this.props.handelSignOut}/>
         <div className="App-sidebar">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <NavLink id="activityitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/activity/list">
-            activity
-          </NavLink>
-          <NavLink id="applicationitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/application/occupation">
-            application
-          </NavLink>
-          <NavLink id="accountitem" className="App-sidebaritem" activeClassName="App-sidebaritemactive" to="/account/profile">
-            account
-          </NavLink>
+          <img src={logo} className="App-logo" alt="logo" />
+          <SideBarItem to="/activity" text = "activity" icon="schedule"></SideBarItem>
+          <SideBarItem to="/application"  text = "application" icon="solution"></SideBarItem>
+          <SideBarItem to="/account" text = "activity" icon="user"></SideBarItem>
         </div>
         <Switch>
           <Route path="/activity" component={Activity} Activity />
