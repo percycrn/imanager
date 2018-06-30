@@ -39,7 +39,7 @@ class MainPage extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <SideBarItem to="/activity" text="activity" icon="schedule" />
           <SideBarItem to="/application" text="application" icon="solution" />
-          <SideBarItem to="/account" text="activity" icon="user" />
+          <SideBarItem to="/account" text="account" icon="user" />
         </div>
         <Switch>
           <Route path="/activity" component={Activity} Activity />

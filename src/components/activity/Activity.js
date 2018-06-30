@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Tabs } from "antd";
-import ActivityList from "./ActivityList";
-import ActivityRecord from "./ActivityRecord";
+import UnjoinedList from "./UnjoinedList";
+import JoinedList from "./JoinedList";
 import { UidContex } from "../../store";
 
 const { TabPane } = Tabs;
@@ -12,14 +12,10 @@ class Activity extends Component {
   handleChange = (key) => {
     switch (key) {
       case "1":
-        // console.log(this.unjoinedRef);
-
         this.unjoinedRef.current.allActs();
         break;
       case "2":
         this.joinedRef.current.allActs();
-        // console.log(this.joinedRef);
-
         break;
       default:
         console.error("wrong key");
@@ -39,10 +35,10 @@ class Activity extends Component {
                 onChange={this.handleChange}
               >
                 <TabPane tab="join activity" key="1" forceRender>
-                  <ActivityList ref={this.unjoinedRef} uid={uid} />
+                  <UnjoinedList ref={this.unjoinedRef} uid={uid} />
                 </TabPane>
                 <TabPane tab="My Activity" key="2" forceRender>
-                  <ActivityRecord ref={this.joinedRef} uid={uid} />
+                  <JoinedList ref={this.joinedRef} uid={uid} />
                 </TabPane>
               </Tabs>
             </div>

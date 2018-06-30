@@ -21,9 +21,9 @@ class LogPage extends Component {
               Modal.error({ content: data.message });
             }
           })
-          .catch((error) => {
+          .catch(
             err => err && console.error(err)
-          });
+          );
       }
     });
   };

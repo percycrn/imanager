@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { List } from "antd";
 import axios from "axios";
+import ActivityCard from "./CardUnjoined";
 
 class ActivityList extends Component {
   state = {
@@ -12,10 +13,8 @@ class ActivityList extends Component {
       .get(`/users/${this.props.uid}/acts`, {
         params: { type: "unjoined" },
       })
-      .then(({data}) => {
-        console.log(data);
-        
-        this.setState({ data:data});
+      .then(({ data }) => {
+        this.setState({ data: data });
       });
   }
 
@@ -26,7 +25,6 @@ class ActivityList extends Component {
   render() {
     return (
       <div className="mainpage">
-        {/* mainpage */}
         <List
           className="demo-loadmore-list"
           size="large"
@@ -38,14 +36,11 @@ class ActivityList extends Component {
             size: "large",
           }}
           renderItem={(item) => (
-            <List.Item actions={[<a>edit</a>]}>
-              <List.Item.Meta title={item.name} description={item.address} />
-              <section>
-                <p>
-                  <strong>Time</strong> {item.startTime} - {item.endTime}
-                </p>
-              </section>
-            </List.Item>
+            <ActivityCard
+              data={item}
+              uid={this.props.uid}
+              handleRefresh={this.allActs.bind(this)}
+            />
           )}
         />
       </div>
