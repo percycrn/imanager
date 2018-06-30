@@ -14,7 +14,6 @@ export default class extends Component {
       />
     ) : (
       <SignUp
-        handelSignIn={this.props.handelSignIn}
         handelSignState={this.signIn}
       />
     );

@@ -1,7 +1,28 @@
-import React, { Component } from 'react';
-import { List } from 'antd';
+import React, { Component } from "react";
+import { List } from "antd";
+import axios from "axios";
 
 class ActivityList extends Component {
+  state = {
+    data: [],
+  };
+
+  allActs() {
+    axios
+      .get(`/users/${this.props.uid}/acts`, {
+        params: { type: "unjoined" },
+      })
+      .then(({data}) => {
+        console.log(data);
+        
+        this.setState({ data:data});
+      });
+  }
+
+  componentWillMount() {
+    this.allActs();
+  }
+
   render() {
     return (
       <div className="mainpage">
@@ -10,13 +31,13 @@ class ActivityList extends Component {
           className="demo-loadmore-list"
           size="large"
           itemLayout="horizontal"
-          dataSource={this.props.data}
+          dataSource={this.state.data}
           pagination={{
-            position: 'bottom',
-            pageSize:4,
-            size:"large"
+            position: "bottom",
+            pageSize: 4,
+            size: "large",
           }}
-          renderItem={item => (
+          renderItem={(item) => (
             <List.Item actions={[<a>edit</a>]}>
               <List.Item.Meta title={item.name} description={item.address} />
               <section>

@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
-import { withRouter, Route, Switch, NavLink } from 'react-router-dom';
-import { Icon } from 'antd';
-import Activity from './activity/Activity';
-import Account from './account/Account';
-import Application from './application/Application';
-import Header from './Header';
-import client from "../client"
+import React, { Component } from "react";
+import { withRouter, Route, Switch, NavLink } from "react-router-dom";
+import { Icon } from "antd";
+import Activity from "./activity/Activity";
+import Account from "./account/Account";
+import Application from "./application/Application";
+import Header from "./Header";
 
-import logo from './logo.svg';
+import logo from "./logo.svg";
 
 const iconStyle = {
   fontSize: 40,
-  color: '#ffffff',
+  color: "#ffffff",
   marginBottom: 10,
 };
 
-const SideBarItem = ({to,text,icon}) => (
+const SideBarItem = ({ to, text, icon }) => (
   <NavLink
     id="activityitem"
     className="App-sidebaritem"
@@ -32,12 +31,15 @@ class MainPage extends Component {
     // mainpage导航栏
     return (
       <div className="rootin">
-        <Header className="App-header" handelSignOut={this.props.handelSignOut}/>
+        <Header
+          className="App-header"
+          handelSignOut={this.props.handelSignOut}
+        />
         <div className="App-sidebar">
           <img src={logo} className="App-logo" alt="logo" />
-          <SideBarItem to="/activity" text = "activity" icon="schedule"></SideBarItem>
-          <SideBarItem to="/application"  text = "application" icon="solution"></SideBarItem>
-          <SideBarItem to="/account" text = "activity" icon="user"></SideBarItem>
+          <SideBarItem to="/activity" text="activity" icon="schedule" />
+          <SideBarItem to="/application" text="application" icon="solution" />
+          <SideBarItem to="/account" text="activity" icon="user" />
         </div>
         <Switch>
           <Route path="/activity" component={Activity} Activity />
