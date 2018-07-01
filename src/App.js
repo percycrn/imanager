@@ -5,8 +5,9 @@ import { withRouter } from "react-router-dom";
 import { UidContex } from "./store";
 
 class App extends Component {
+  // TODO be fasle in production
   state = {
-    isSignIn: false,
+    isSignIn: true,
     uid: 2,
   };
 

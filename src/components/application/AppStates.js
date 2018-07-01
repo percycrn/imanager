@@ -1,42 +1,40 @@
 import React, { Component } from "react";
-import { List, Avatar } from "antd";
-const data = [
-  {
-    title: 'Ant Design Title 1',
-  },
-  {
-    title: 'Ant Design Title 2',
-  },
-  {
-    title: 'Ant Design Title 3',
-  },
-  {
-    title: 'Ant Design Title 4',
-  },
-  {
-    title: 'Ant Design Title 4',
-  },
-];
-class AppStates extends Component {
+import { List, Col, Button, message } from "antd";
+import axios from "axios";
+
+class AppList extends Component {
+  state = {
+    data: [],
+  };
+
+  allActs = () => {
+    axios.get(`/users/${this.props.uid}/apps`).then(({ data }) => {
+      this.setState({ data: data });
+    });
+  };
+
+  componentWillMount() {
+    this.allActs();
+  }
   render() {
     return (
       <div className="mainpage">
-        {/* mainpage */}
         <List
           className="demo-loadmore-list"
+          size="large"
           itemLayout="horizontal"
-          dataSource={data}
-          renderItem={item => (
-            <List.Item actions={[<a>edit</a>, <a>more</a>]}>
-              <List.Item.Meta
-                avatar={
-                  <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                }
-                title={<a href="https://ant.design">{item.title}</a>}
-                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-              />
-              <div>content</div>
-            </List.Item>
+          dataSource={this.state.data}
+          pagination={{
+            position: "bottom",
+            pageSize: 4,
+            size: "large",
+          }}
+          renderItem={(item) => (
+            <ListItem
+              data={item}
+              uid={this.props.uid}
+              handleRefresh={this.allActs}
+            />
           )}
         />
       </div>
@@ -44,4 +42,36 @@ class AppStates extends Component {
   }
 }
 
-export default AppStates;
+class ListItem extends Component {
+  handelCancel = () => {
+    axios
+      .delete(`/users/${this.props.uid}/apps/${this.props.data.apid}`)
+      .then(({ data }) => {
+        if (data.status === 200) {
+          message.success("success");
+        } else {
+          message.error("error");
+          console.error(data);
+        }
+        this.props.handleRefresh();
+      });
+  };
+  render() {
+    const data = this.props.data;
+    return (
+      <List.Item
+        size="large"
+        actions={[
+          <Button type="primary" onClick={this.handelCancel}>
+            cancel
+          </Button>,
+        ]}
+      >
+        <Col span={6}>tag:{data.tag}</Col>
+        <Col span={6}>status:{data.status}</Col>
+      </List.Item>
+    );
+  }
+}
+
+export default AppList;

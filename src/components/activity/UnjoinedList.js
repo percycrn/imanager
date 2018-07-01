@@ -27,7 +27,6 @@ class ActivityList extends Component {
       <div className="mainpage">
         <List
           className="demo-loadmore-list"
-          size="large"
           itemLayout="horizontal"
           dataSource={this.state.data}
           pagination={{

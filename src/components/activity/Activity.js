@@ -29,11 +29,7 @@ class Activity extends Component {
 
           return (
             <div className="App-main">
-              <Tabs
-                defaultActiveKey="1"
-                size="large"
-                onChange={this.handleChange}
-              >
+              <Tabs defaultActiveKey="1" onChange={this.handleChange}>
                 <TabPane tab="join activity" key="1" forceRender>
                   <UnjoinedList ref={this.unjoinedRef} uid={uid} />
                 </TabPane>

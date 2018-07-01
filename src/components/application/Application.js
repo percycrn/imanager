@@ -1,64 +1,33 @@
 import React, { Component } from "react";
-import { Menu, Dropdown, Icon, Tabs } from "antd";
-import { Route, Switch, NavLink } from "react-router-dom";
+import { Tabs } from "antd";
 import AppOccupation from "./AppOccupation";
 import AppStates from "./AppStates";
+import { UidContex } from "../../store";
 
-const TabPane =Tabs.TabPane
+const TabPane = Tabs.TabPane;
+
 class Application extends Component {
-  state = {
-    current: "mail",
-  };
-  handleClick = (e) => {
-    console.log("click ", e);
-    this.setState({
-      current: e.key,
-    });
-  };
+  
   render() {
     return (
-      <div className="App-main">
-        {/* title */}
-        <div className="App-title">
-          <h1>Manage Your Applications</h1>
-        </div>
-        {/* navigation */}
-        <div className="App-navigation">
-          <Menu
-            onClick={this.handleClick}
-            selectedKeys={[this.state.current]}
-            mode="horizontal"
-          >
-            <Menu.Item key="mail">
-              <NavLink to="/application/occupation">
-                Application Occupation
-              </NavLink>
-            </Menu.Item>
-            <Menu.Item key="app">
-              <NavLink to="/application/states">Application States</NavLink>
-            </Menu.Item>
-          </Menu>
-        </div>
-        <Switch>
-          <Route
-            path="/application/occupation"
-            component={AppOccupation}
-            AppOccupation
-          />
-          <Route path="/application/states" component={AppStates} AppStates />
-        </Switch>
-        <Tabs defaultActiveKey="1">
-          <TabPane tab="Tab 1" key="1">
-            Content of Tab Pane 1
-          </TabPane>
-          <TabPane tab="Tab 2" key="2">
-            Content of Tab Pane 2
-          </TabPane>
-          <TabPane tab="Tab 3" key="3">
-            Content of Tab Pane 3
-          </TabPane>
-        </Tabs>
-      </div>
+      <UidContex.Consumer>
+        {(uid) => {
+          console.log("uid", uid);
+
+          return (
+            <div className="App-main">
+              <Tabs defaultActiveKey="1">
+                <TabPane tab="Mine" key="1">
+                  <AppStates />
+                </TabPane>
+                <TabPane tab="Apply" key="2">
+                  <AppOccupation />
+                </TabPane>
+              </Tabs>
+            </div>
+          );
+        }}
+      </UidContex.Consumer>
     );
   }
 }
