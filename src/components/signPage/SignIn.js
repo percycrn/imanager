@@ -1,37 +1,32 @@
-import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Modal } from 'antd';
-import client from '../../client';
-import gql from 'graphql-tag';
-
+// @ts-check
+import React, { Component } from "react";
+import { Form, Icon, Input, Button, Modal } from "antd";
+import axios from "axios";
 const FormItem = Form.Item;
 
 class LogPage extends Component {
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   this.props.form.validateFields((err, values) => {
-  //     if (!err) {
-  //       console.log('Received values of form: ', values);
-  //       client
-  //         .mutate({
-  //           mutation: querySignIn,
-  //           variables: values,
-  //         })
-  //         .then(({ data }) => {
-  //           const { res } = data;
-  //           console.log(res);
-  //           if (res.errorMessage) {
-  //             Modal.error({ content: res.errorMessage });
-  //             return;
-  //           }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log("Received values of form: ", values);
 
-  //           this.props.handelSignIn();
-  //         })
-  //         .catch(err => {
-  //           console.error(err);
-  //         });
-  //     }
-  //   });
-  // };
+        axios
+          .post("/signin", values)
+          .then(({data}) => {
+            console.log(data);
+            if (data.status === 200) {
+              this.props.handelSignIn(data.uid);
+            }else{
+              Modal.error({ content: data.message });
+            }
+          })
+          .catch(
+            err => err && console.error(err)
+          );
+      }
+    });
+  };
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
@@ -42,38 +37,38 @@ class LogPage extends Component {
           </FormItem>
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
-              {getFieldDecorator('phoneNumber', {
+              {getFieldDecorator("phoneNumber", {
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your phone number!',
+                    message: "Please input your phone number!",
                   },
                 ],
               })(
                 <Input
                   prefix={
-                    <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
+                    <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
                   placeholder="phone number"
-                />,
+                />
               )}
             </FormItem>
             <FormItem>
-              {getFieldDecorator('password', {
+              {getFieldDecorator("password", {
                 rules: [
                   {
                     required: true,
-                    message: 'Please input your password!',
+                    message: "Please input your password!",
                   },
                 ],
               })(
                 <Input
                   prefix={
-                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                    <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
                   type="password"
                   placeholder="Password"
-                />,
+                />
               )}
             </FormItem>
 
@@ -93,35 +88,5 @@ class LogPage extends Component {
     );
   }
 }
-const querySignIn = gql`
-  mutation signin($phoneNumber: String, $password: String) {
-    res: signIn(data: { password: $password, phoneNumber: $phoneNumber }) {
-      errorMessage
-      user {
-        uid
-        name
-        email
-        tags
-        address
-        phoneNumber
-      }
-      token
-      joinedActivites {
-        aid
-        name
-        address
-        startTime
-        endTime
-        now
-        max
-        min
-        summary
-        tag
-        signUpTime
-        state
-      }
-    }
-  }
-`;
-LogPage = Form.create()(LogPage);
-export default LogPage;
+
+export default Form.create()(LogPage);

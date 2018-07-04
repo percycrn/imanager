@@ -3,13 +3,6 @@
 a:focus {
   text-decoration: none;
 }
-#root {
-  color: #616366;
-  font-family: 'Raleway', Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 25px;
-}
 
 /* main page */
 .rootin {
@@ -21,7 +14,6 @@ a:focus {
     's h'
     's m';
   color: #616366;
-  font-family: 'Raleway', Helvetica, Arial, sans-serif;
   height: 100vh;
 }
 
@@ -150,7 +142,3 @@ a:focus {
 .apply-button {
   margin-left: 10px;
 }
-
-/* .mainpage{
-  overflow: scroll;
-} */

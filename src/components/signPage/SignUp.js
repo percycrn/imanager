@@ -1,7 +1,8 @@
+//@ts-check
+
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Modal } from 'antd';
-import client from '../../client';
-import gql from 'graphql-tag';
+import axios from 'axios';
 
 const FormItem = Form.Item;
 
@@ -11,24 +12,18 @@ class LogPage extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        client
-          .mutate({
-            mutation: querySignIn,
-            variables: values,
-          })
-          .then(({ data }) => {
-            const { res } = data;
+       
+        axios
+          .post('/signup', values)
+          .then(res => {
             console.log(res);
-            if (res.errorMessage) {
-              Modal.error({ content: res.errorMessage });
-              return;
+            if (res.status === 200) {
+              this.props.handelSignState();
+            } else {
+              Modal.error({ content: res.data });
             }
-
-            this.props.handelSignIn();
           })
-          .catch(err => {
-            console.error(err);
-          });
+          .catch(err => err && console.error(err));
       }
     });
   };
@@ -93,13 +88,5 @@ class LogPage extends Component {
     );
   }
 }
-const querySignIn = gql`
-  mutation signup($phoneNumber: String, $password: String) {
-    res: signUp(data: { password: $password, phoneNumber: $phoneNumber }) {
-      errorMessage
-    }
-  }
-`;
 
-LogPage = Form.create()(LogPage);
-export default LogPage;
+export default Form.create()(LogPage);

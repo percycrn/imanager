@@ -1,155 +1,48 @@
-import React, { Component } from 'react';
-import {  Tabs } from 'antd';
-import ActivityList from './ActivityList';
-import ActivityRecord from './ActivityRecord';
+import React, { Component } from "react";
+import { Tabs } from "antd";
+import UnjoinedList from "./UnjoinedList";
+import JoinedList from "./JoinedList";
+import { UidContex } from "../../store";
 
 const { TabPane } = Tabs;
 class Activity extends Component {
-  state = {
-    unjoined:data,
-    joinedData: data,
+  unjoinedRef = React.createRef();
+  joinedRef = React.createRef();
+
+  handleChange = (key) => {
+    switch (key) {
+      case "1":
+        this.unjoinedRef.current.allActs();
+        break;
+      case "2":
+        this.joinedRef.current.allActs();
+        break;
+      default:
+        console.error("wrong key");
+    }
   };
   render() {
     return (
-      <div className="App-main">
-        <Tabs defaultActiveKey="1" size="large">
-          <TabPane tab="join activity" key="1">
-            <ActivityList data={this.state.unjoined}/>
-          </TabPane>
-          <TabPane tab="My Activity" key="2">
-            <ActivityRecord data={this.state.joinedData}/>
-          </TabPane>
-        </Tabs>
-      </div>
+      <UidContex.Consumer>
+        {(uid) => {
+          console.log("uid", uid);
+
+          return (
+            <div className="App-main">
+              <Tabs defaultActiveKey="1" onChange={this.handleChange}>
+                <TabPane tab="join activity" key="1" forceRender>
+                  <UnjoinedList ref={this.unjoinedRef} uid={uid} />
+                </TabPane>
+                <TabPane tab="My Activity" key="2" forceRender>
+                  <JoinedList ref={this.joinedRef} uid={uid} />
+                </TabPane>
+              </Tabs>
+            </div>
+          );
+        }}
+      </UidContex.Consumer>
     );
   }
 }
-const data = [
-  {
-    aid: 'xxxxxxxxxxxxxxx',
-    name: 'xxxxxxxxxxxxxxx',
-    address: 'xxxxxxxxxxxxxxx',
-    startTime: '0000/00/00 00:00',
-    endTime: '0000/00/00 00:00',
-    now: 0,
-    max: 0,
-    min: 0,
-    summary: 'xxxxxxxxxxxxxxx',
-    tag: ['xxx', 'xxx', 'xxx'],
-    signUpTime: '0000/00/00 00:00',
-    state: 'xxxxx',
-  },
-  {
-    aid: 'xxxxxxxxxxxxxxx',
-    name: 'xxxxxxxxxxxxxxx',
-    address: 'xxxxxxxxxxxxxxx',
-    startTime: '0000/00/00 00:00',
-    endTime: '0000/00/00 00:00',
-    now: 0,
-    max: 0,
-    min: 0,
-    summary: 'xxxxxxxxxxxxxxx',
-    tag: ['xxx', 'xxx', 'xxx'],
-    signUpTime: '0000/00/00 00:00',
-    state: 'xxxxx',
-  },
-  {
-    aid: 'xxxxxxxxxxxxxxx',
-    name: 'xxxxxxxxxxxxxxx',
-    address: 'xxxxxxxxxxxxxxx',
-    startTime: '0000/00/00 00:00',
-    endTime: '0000/00/00 00:00',
-    now: 0,
-    max: 0,
-    min: 0,
-    summary: 'xxxxxxxxxxxxxxx',
-    tag: ['xxx', 'xxx', 'xxx'],
-    signUpTime: '0000/00/00 00:00',
-    state: 'xxxxx',
-  },
-  {
-    aid: 'xxxxxxxxxxxxxxx',
-    name: 'xxxxxxxxxxxxxxx',
-    address: 'xxxxxxxxxxxxxxx',
-    startTime: '0000/00/00 00:00',
-    endTime: '0000/00/00 00:00',
-    now: 0,
-    max: 0,
-    min: 0,
-    summary: 'xxxxxxxxxxxxxxx',
-    tag: ['xxx', 'xxx', 'xxx'],
-    signUpTime: '0000/00/00 00:00',
-    state: 'xxxxx',
-  },
-  {
-    aid: 'xxxxxxxxxxxxxxx',
-    name: 'xxxxxxxxxxxxxxx',
-    address: 'xxxxxxxxxxxxxxx',
-    startTime: '0000/00/00 00:00',
-    endTime: '0000/00/00 00:00',
-    now: 0,
-    max: 0,
-    min: 0,
-    summary: 'xxxxxxxxxxxxxxx',
-    tag: ['xxx', 'xxx', 'xxx'],
-    signUpTime: '0000/00/00 00:00',
-    state: 'xxxxx',
-  },
-  {
-    aid: 'xxxxxxxxxxxxxxx',
-    name: 'xxxxxxxxxxxxxxx',
-    address: 'xxxxxxxxxxxxxxx',
-    startTime: '0000/00/00 00:00',
-    endTime: '0000/00/00 00:00',
-    now: 0,
-    max: 0,
-    min: 0,
-    summary: 'xxxxxxxxxxxxxxx',
-    tag: ['xxx', 'xxx', 'xxx'],
-    signUpTime: '0000/00/00 00:00',
-    state: 'xxxxx',
-  },
-  {
-    aid: 'xxxxxxxxxxxxxxx',
-    name: 'xxxxxxxxxxxxxxx',
-    address: 'xxxxxxxxxxxxxxx',
-    startTime: '0000/00/00 00:00',
-    endTime: '0000/00/00 00:00',
-    now: 0,
-    max: 0,
-    min: 0,
-    summary: 'xxxxxxxxxxxxxxx',
-    tag: ['xxx', 'xxx', 'xxx'],
-    signUpTime: '0000/00/00 00:00',
-    state: 'xxxxx',
-  },
-  {
-    aid: 'xxxxxxxxxxxxxxx',
-    name: 'xxxxxxxxxxxxxxx',
-    address: 'xxxxxxxxxxxxxxx',
-    startTime: '0000/00/00 00:00',
-    endTime: '0000/00/00 00:00',
-    now: 0,
-    max: 0,
-    min: 0,
-    summary: 'xxxxxxxxxxxxxxx',
-    tag: ['xxx', 'xxx', 'xxx'],
-    signUpTime: '0000/00/00 00:00',
-    state: 'xxxxx',
-  },
-  {
-    aid: 'xxxxxxxxxxxxxxx',
-    name: 'xxxxxxxxxxxxxxx',
-    address: 'xxxxxxxxxxxxxxx',
-    startTime: '0000/00/00 00:00',
-    endTime: '0000/00/00 00:00',
-    now: 0,
-    max: 0,
-    min: 0,
-    summary: 'xxxxxxxxxxxxxxx',
-    tag: ['xxx', 'xxx', 'xxx'],
-    signUpTime: '0000/00/00 00:00',
-    state: 'xxxxx',
-  },
-];
+
 export default Activity;
