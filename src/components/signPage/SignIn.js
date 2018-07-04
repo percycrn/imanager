@@ -6,32 +6,32 @@ import gql from 'graphql-tag';
 const FormItem = Form.Item;
 
 class LogPage extends Component {
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-        client
-          .mutate({
-            mutation: querySignIn,
-            variables: values,
-          })
-          .then(({ data }) => {
-            const { res } = data;
-            console.log(res);
-            if (res.errorMessage) {
-              Modal.error({ content: res.errorMessage });
-              return;
-            }
+  // handleSubmit = e => {
+  //   e.preventDefault();
+  //   this.props.form.validateFields((err, values) => {
+  //     if (!err) {
+  //       console.log('Received values of form: ', values);
+  //       client
+  //         .mutate({
+  //           mutation: querySignIn,
+  //           variables: values,
+  //         })
+  //         .then(({ data }) => {
+  //           const { res } = data;
+  //           console.log(res);
+  //           if (res.errorMessage) {
+  //             Modal.error({ content: res.errorMessage });
+  //             return;
+  //           }
 
-            this.props.handelSignIn();
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      }
-    });
-  };
+  //           this.props.handelSignIn();
+  //         })
+  //         .catch(err => {
+  //           console.error(err);
+  //         });
+  //     }
+  //   });
+  // };
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
