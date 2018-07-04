@@ -67,7 +67,7 @@ class ListItem extends Component {
       >
         <Col span={6}>tag:{data.tag}</Col>
         <Col span={6}>state:{data.state}</Col>
-        <Col span={6}>applyTime:{data.applyTime}</Col>
+        <Col span={6}>applyTime:{new Date(data.applyTime).toLocaleDateString()}</Col>
       </List.Item>
     );
   }
