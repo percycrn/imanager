@@ -7,14 +7,14 @@ class AppList extends Component {
     data: [],
   };
 
-  allActs = () => {
+  allApps = () => {
     axios.get(`/users/${this.props.uid}/apps`).then(({ data }) => {
       this.setState({ data: data });
     });
   };
 
   componentWillMount() {
-    this.allActs();
+    this.allApps();
   }
   render() {
     return (
@@ -33,7 +33,7 @@ class AppList extends Component {
             <ListItem
               data={item}
               uid={this.props.uid}
-              handleRefresh={this.allActs}
+              handleRefresh={this.allApps}
             />
           )}
         />
@@ -44,17 +44,15 @@ class AppList extends Component {
 
 class ListItem extends Component {
   handelCancel = () => {
-    axios
-      .delete(`/users/${this.props.uid}/apps/${this.props.data.apid}`)
-      .then(({ data }) => {
-        if (data.status === 200) {
-          message.success("success");
-        } else {
-          message.error("error");
-          console.error(data);
-        }
-        this.props.handleRefresh();
-      });
+    axios.delete(`/apps/${this.props.data.apid}`).then(({ data }) => {
+      if (data.status === 200) {
+        message.success("success");
+      } else {
+        message.error("error");
+        console.error(data);
+      }
+      this.props.handleRefresh();
+    });
   };
   render() {
     const data = this.props.data;

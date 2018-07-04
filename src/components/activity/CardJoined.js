@@ -62,7 +62,7 @@ class ActivityCard extends Component {
             <p>max {data.max}</p>
             <p>min {data.min}</p>
             <p>summary {data.summary}</p>
-            <p>tags {data.tags.map((x, i) => <strong key={i}>{x}</strong>)}</p>
+            <p>tag {data.tag}</p>
             <p>createTime {data.createTime}</p>
             <p>state {data.state}</p>
           </div>

@@ -7,6 +7,7 @@ class AppOccupation extends Component {
   state = {
     tagSelected: "",
   };
+
   applay = () => {
     axios
       .post(`/users/${this.props.uid}/apps`, {
@@ -27,6 +28,7 @@ class AppOccupation extends Component {
 
     this.setState({ tagSelected: value });
   };
+
   render() {
     return (
       <div className="mainpage">

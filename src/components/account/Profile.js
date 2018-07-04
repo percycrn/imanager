@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Form, Input, Tooltip, Icon, Button } from "antd";
+import { Form, Input, Tooltip, Icon, Button, message } from "antd";
+import axios from "axios";
 const FormItem = Form.Item;
 
 class Profile extends Component {
@@ -9,6 +10,14 @@ class Profile extends Component {
       if (!err) {
         console.log("Received values of form: ", values);
       }
+      axios.put(`/users/${this.props.uid}`, values).then(({ data }) => {
+        if (data.status === 200) {
+          message.success("success");
+        } else {
+          message.error("error");
+          console.error(data);
+        }
+      });
     });
   };
 

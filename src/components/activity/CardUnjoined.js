@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import { Modal, List, Button, message } from "antd";
+import { Modal, List, Button, message, Select } from "antd";
 import axios from "axios";
+const { Option } = Select;
 
 class ActivityCard extends Component {
-  state = { visible: false };
+  state = {
+    visible: false,
+    tagSelected: "",
+  };
 
   showModal = () => {
     this.setState({
@@ -14,12 +18,23 @@ class ActivityCard extends Component {
   handleClose = () => {
     this.setState({
       visible: false,
+      tagSelected: "",
     });
   };
-
+  handleChange = (value) => {
+    this.setState({ tagSelected: value });
+  };
   handleJoin = () => {
+    if (this.state.tagSelected === "") {
+      message.warn("need tag");
+      return
+    }
     axios
-      .post(`/users/${this.props.uid}/acts/${this.props.data.aid}`)
+      .post(
+        `/users/${this.props.uid}/acts/${this.props.data.aid}/tags/${
+          this.state.tagSelected
+        }`
+      )
       .then(({ data }) => {
         if (data.status === 200) {
           message.success("success");
@@ -62,10 +77,16 @@ class ActivityCard extends Component {
             <p>max {data.max}</p>
             <p>min {data.min}</p>
             <p>summary {data.summary}</p>
-            <p>tags {data.tags.map((x, i) => <strong key={i}>{x}</strong>)}</p>
+            <p>tag {data.tag}</p>
             <p>createTime {data.createTime}</p>
             <p>state {data.state}</p>
           </div>
+
+          <Select style={{ width: 200 }} onChange={this.handleChange}>
+            <Option value="listenser">Listenser</Option>
+            <Option value="volunter">Volunter</Option>
+            <Option value="teacher">Teacher</Option>
+          </Select>
         </Modal>
       </List.Item>
     );
